@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadaca3</title>
+</head>
+<body>
+    <script>
+      p=prompt("Vnesi poraka:")
+      arr=p.split(" ")
+      max=0
+      for(i=0; i<arr.length; i++){
+          if(arr[i].length>max){
+              max=arr[i].length
+                indx=i;
+          }
+      }
+      alert(arr[indx])
+    </script>
+</body>
+</html>

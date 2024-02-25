@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vtora</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .asd {
+      display: inline-block;
+      width: 80px;
+      text-align: right;
+      margin: 5px;
+    }
+    [type='submit'] {
+      margin-left: 210px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<form action="#" id="forma">
+  <label class="asd" for="items">Items:</label>
+  <input type="text" name="items" id="items" />
+  <br />
+  <label class="asd" for="type">Type:</label>
+  <select name="tip" id="tip">
+    <option value="radio">Radio button</option>
+    <option value="checkbox">Check box</option>
+  </select>
+  <br />
+  <input type="submit" value="Прикажи" />
+</form>
+<div id="tuka"></div>
+<script>
+  document.getElementById('forma').addEventListener('submit', function (e) {
+    e.preventDefault();
+    let itemi = e.target[0].value.split(',');
+    let vidovi = e.target[1].value;
+
+    for (let i = 0; i < itemi.length; i++) {
+      let novInput = document.createElement('input');
+      novInput.setAttribute('type', vidovi);
+      document.getElementById('tuka').append(novInput);
+
+      let novLabel = document.createElement('label');
+      novLabel.append(itemi[i]);
+      document.getElementById('tuka').append(novLabel);
+    }
+    console.log(itemi);
+  });
+</script>
+</body>
+</html>

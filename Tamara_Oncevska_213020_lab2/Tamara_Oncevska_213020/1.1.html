@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadaca1</title>
+</head>
+<body>
+<script>
+    var n=prompt("Vnesi tricifren broj:")
+    n=parseInt(n);
+    if(isNaN(n)){
+        alert("Vneseniot broj ne e pravilen tricifren broj!")
+    }
+    if(n/100 < 1 || n/100 >= 10)
+    {
+        document.write("Ne mozhe da se proveri vneseniot broj!")
+    }
+    else
+    {
+        var cifra3=n%10;
+        var cifra1=parseInt(n/100);
+
+        if(cifra1 == cifra3)
+        {
+            alert("Vneseniot broj e palindrom!")
+        }
+        else
+        {
+            alert("Vneseniot broj ne e palindrom!")
+        }
+    }
+</script>
+
+
+</body>
+</html>

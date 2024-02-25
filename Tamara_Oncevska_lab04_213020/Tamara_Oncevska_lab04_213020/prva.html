@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>prva</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        label {
+            display: inline-block;
+            width: 80px;
+            text-align: right;
+            margin: 8px;
+        }
+        [type='submit'] {
+            margin-left: 233px;
+            display: block;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding: 3px;
+        }
+        th {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<form action="#" id="forma">
+    <label for="ime">Име:</label>
+    <input type="text" name="" id="ime" />
+    <br />
+    <label for="prezime">Презиме:</label>
+    <input type="text" name="prezime" id="prezime" />
+    <br />
+    <label for="indeks">Индекс:</label>
+    <input type="text" name="indeks" id="indeks" />
+    <br />
+    <label for="predmet">Предмет:</label>
+    <input type="text" name="predmet" id="predmet" />
+    <br />
+    <label for="ocena">Оцена:</label>
+    <select name="ocena" id="ocena">
+        <option value="5">5 (пет)</option>
+        <option value="6">6 (шест)</option>
+        <option value="7">7 (седум)</option>
+        <option value="8">8 (осум)</option>
+        <option value="9">9 (девет)</option>
+        <option value="10">10 (десет)</option>
+    </select>
+    <input type="submit" value="Внеси" />
+</form>
+<table id="tabla">
+    <tr>
+        <th>Име</th>
+        <th>Презиме</th>
+        <th>Индекс</th>
+        <th>Предмет</th>
+        <th>Оцена</th>
+    </tr>
+</table>
+<script>
+    let nizaObjekti = [];
+    document.getElementById('forma').addEventListener('submit', function (e) {
+        let imee = e.target[0].value;
+        let prezime = e.target[1].value;
+        let indeks = e.target[2].value;
+        let predmet = e.target[3].value;
+        let ocena = e.target[4].value;
+        let objekt = {};
+        objekt.ime = imee;
+        objekt.prezime = prezime;
+        objekt.indeks = indeks;
+        objekt.ocena = ocena;
+        nizaObjekti.push(objekt);
+        console.log(nizaObjekti);
+        let novRed = document.createElement('tr');
+        let tdIme = document.createElement('td');
+        tdIme.append(imee);
+        let tdPrezime = document.createElement('td');
+        tdPrezime.append(prezime);
+        let tdIndeks = document.createElement('td');
+        tdIndeks.append(indeks);
+        let tdPredmet = document.createElement('td');
+        tdPredmet.append(predmet);
+        let tdOcena = document.createElement('td');
+        tdOcena.append(ocena);
+        novRed.append(tdIme);
+        novRed.append(tdPrezime);
+        novRed.append(tdIndeks);
+        novRed.append(tdPredmet);
+        novRed.append(tdOcena);
+        document.getElementById('tabla').append(novRed);
+        e.target[0].value = '';
+        e.target[1].value = '';
+        e.target[2].value = '';
+        e.target[3].value = '';
+    });
+</script>
+</body>
+</html>

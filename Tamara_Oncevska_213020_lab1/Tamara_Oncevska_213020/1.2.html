@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zadaca2</title>
+</head>
+<body>
+    <script>
+      var broj = prompt("Vnesi telefonski broj:")
+      broj=parseInt(broj);
+      if(isNaN(broj)){
+        alert("Ne vnese pravilen broj")
+      }
+      //XXYYYZZZ
+      var operator=parseInt(broj/1000000%10)
+      var message
+      if(operator=='0' || operator=='1' || operator=='2'){
+          message="Tmobile";
+      }
+      else if(operator=='5' || operator=='6' ) {
+          message = "ONE";
+      }
+      else if (operator=='7' || operator=='8' ) {
+          message = "VIP";
+      }
+      else message="Nepostoecki operator"
+      alert("0"+ parseInt(broj/1000000) +"/" + parseInt(broj/1000%1000) +"-"+ parseInt(broj%1000)+ "\n" + message)
+    </script>
+</body>
+</html>
