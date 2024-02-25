@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Zadaca1</title>
+    <script>
+        var xml= new XMLHttpRequest();
+        var response;
+        var flag=true;
+        function funkcija1(){
+
+        xml.onreadystatechange=function(){
+            if(xml.readyState==4 && xml.status==200)
+            {
+                var pomjson=xml.responseText;
+                response=JSON.parse(pomjson);
+
+                funkcija2();
+            }
+        };
+        xml.open('GET','ovoshki.json',true);
+        xml.send();
+
+
+        }
+        function funkcija2(){
+            for(var i=0;i<response.length;i++){
+                for(var j=0;j<3;j++) {
+                    var id = (i+1) + "" + (j+1);
+                    if(j==0)
+                    document.getElementById(id).innerHTML=response[i].ime;
+                    if(j==1)
+                    document.getElementById(id).innerHTML=response[i].kolichina;
+                    if(j==2)
+                    document.getElementById(id).innerHTML=response[i].cena;
+                }
+            }
+
+        }
+
+        function funkcija3(){
+                var suma=0;
+                flag=true;
+            document.getElementById('info').innerHTML="";
+                for(var i=0;i<response.length;i++){
+                    var id = (i+1) + "" + 3;
+                    var id2="cena"+i;
+                    document.getElementById(i+1).setAttribute('style','background-color:white');
+
+                if(document.getElementById(id2).value<0) {
+                    flag = false;
+                    var div =document.createElement('div');
+                    div.innerHTML="negativna vrednost kaj "+response[i].ime;
+                    document.getElementById(i+1).setAttribute('style','background-color:red');
+                    document.getElementById("info").appendChild(div);
+                }
+                    if(document.getElementById(id2).value>response[i].kolichina){
+                        flag=false;
+                        var div2=document.createElement('div');
+                        div2.innerHTML="pogreshna kolichina kaj "+response[i].ime;
+                        document.getElementById(i+1).setAttribute('style','background-color:red');
+                        document.getElementById("info").appendChild(div2);
+                    }
+                    suma=suma+(response[i].cena * document.getElementById(id2).value);
+
+
+            }
+            if(flag==true){
+                document.getElementById('info').innerHTML="vkupna cena "+suma;
+            }
+
+        }
+    </script>
+</head >
+<body onload="funkcija1()">
+    <table border="double">
+        <tr id="0" >
+            <th >ime</th>
+            <th >kolichina</th>
+            <th>cena</th>
+            <th>kupi</th>
+        </tr>
+        <tr id="1">
+            <td id="11"></td>
+            <td id="12"></td>
+            <td id="13"></td>
+            <td style=""><input style="width:40px;" type="number" id="cena0"/></td>
+        </tr>
+        <tr id="2">
+            <td id="21"></td>
+            <td id="22"></td>
+            <td id="23"></td>
+            <td><input style="width:40px;" type="number" id="cena1"/></td>
+        </tr>
+        <tr id="3">
+            <td id="31"></td>
+            <td id="32"></td>
+            <td id="33"></td>
+            <td><input style="width:40px;" type="number" id="cena2"/></td>
+
+        </tr>
+        <tr id="4">
+            <td id="41"></td>
+            <td id="42"></td>
+            <td id="43"></td>
+            <td><input style="width:40px;" type="number" id="cena3"/></td>
+        </tr>
+        <tr id="5">
+            <td id="51"></td>
+            <td id="52"></td>
+            <td id="53"></td>
+            <td><input style="width:40px;" type="number" id="cena4"/></td>
+        </tr>
+
+    </table>
+    <input type="submit" value="presmetaj" onclick="funkcija3()">
+<div id="info">
+
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Zadaca1</title>
+    <script>
+        var pomjson= new XMLHttpRequest();
+        var json;
+        flag=false;
+        var flag2=false;
+        function funkcija1(){
+
+
+            pomjson.onreadystatechange=function(){
+                if(pomjson.readyState==4 && pomjson.status==200){
+                    var a=pomjson.responseText;
+                    json=JSON.parse(a);
+                    funkcija2();
+
+                }
+            };
+
+            pomjson.open("GET",'avtomobili.json',true);
+            pomjson.send();
+
+        }
+        function funkcija2(){
+
+            for(var i=0;i<json.length;i++){
+document.getElementById('glaven').innerHTML+="<p id='par"+i+"'>marka:"+json[i].marka+" model:"+json[i].model+" boja:<input id='boja"+i+"'type='color' value='"+json[i].boja+"'/> max brzina:<input id='"+i+"' onchange='funkcija4("+i+")' type='number' value='"+json[i].maxbrzina+"'/> </p>";
+                if(flag2==true)
+                document.getElementById("par"+i).setAttribute('style',"background-color:"+document.getElementById("boja"+i).value);
+            }
+
+        }
+        function funkcija3(){
+            var pom;
+
+            for(var i=0;i<json.length;i++)
+                for(var j=0;j<json.length;j++)
+                {if(json[i].maxbrzina<json[j].maxbrzina){
+                     pom=json[i];
+                    json[i]=json[j];
+                    json[j]=pom;
+
+                }}
+            document.getElementById('glaven').innerHTML="";
+            flag2=true;
+            funkcija2();
+
+
+        }
+        function funkcija4(id){
+
+            json[id].maxbrzina=document.getElementById(id).value;
+            funkcija3();
+        }
+
+    </script>
+
+</head>
+<body onload="funkcija1()">
+<div id="glaven">
+
+</div>
+<input type="submit" value="sortiraj" onclick="funkcija3()">
+</body>
+</html>

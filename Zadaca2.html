@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Zadaca2</title>
+    <script>
+
+
+        var flag=0;
+        var random=Math.random()* 0.99;
+        var x=[];
+        var y=[];
+        random=parseInt(random);
+        function funkcija1(){
+            var canvas=document.getElementById('MyCanvas');
+                 var gg= function(a,b){
+
+            var ctx= canvas.getContext('2d');
+
+            x[flag]=a;
+            y[flag]=b;
+
+            var boja1=document.getElementById('boja1').value;
+            var boja2=document.getElementById('boja2').value;
+            flag++;
+
+            if(flag==1) {
+                ctx.beginPath();
+                ctx.fillStyle = boja1;
+                ctx.arc(x[0]-7,y[0]-7,1,0,360);
+                ctx.fill();
+
+                ctx.closePath();
+
+            }
+            if(document.getElementById('box').checked && flag==2){
+                ctx.beginPath();
+                var grad;
+                var a;
+                if(Math.abs(x[0]-x[1])>Math.abs(y[0]-y[1]))
+                 a=Math.abs(y[0]-y[1]);
+                else  a =Math.abs(x[0]-x[1]);
+                if(x[0]<x[1] && y[0]<y[1])
+                {
+                    grad=ctx.createRadialGradient(x[0], y[0],a+7, x[1], y[1],a+7);
+                    ctx.rect(x[0]-7,y[0]-7,Math.abs(x[0]-x[1]),Math.abs(y[0]-y[1]));
+                    grad.addColorStop(0,boja1);
+                    grad.addColorStop(1,boja2);}
+                if(x[0]>x[1] && y[0]<y[1])
+                {grad=ctx.createRadialGradient(x[1], y[0],a+7, x[0], y[1],a+7);
+                    ctx.rect(x[1]-7,y[0]-7,Math.abs(x[0]-x[1]),Math.abs(y[0]-y[1]));
+                    grad.addColorStop(0,boja1);
+                    grad.addColorStop(1,boja2);}
+                if(y[0]>y[1] && x[0]<x[1])
+                { grad=ctx.createRadialGradient(x[0], y[1],a+7, x[1], y[0],a+7);
+                    ctx.rect(x[0]-7,y[1]-7,Math.abs(x[0]-x[1]),Math.abs(y[0]-y[1]));
+                    grad.addColorStop(0,boja1);
+                    grad.addColorStop(1,boja2);}
+                    if(x[0]>x[1] && y[0]>y[1])
+                    { grad=ctx.createRadialGradient(x[1], y[1],a+7, x[0], y[0],a+7);
+                        ctx.rect(x[1]-7,y[1]-7,Math.abs(x[0]-x[1]),Math.abs(y[0]-y[1]));
+                grad.addColorStop(0,boja1);
+                grad.addColorStop(1,boja2);}
+                ctx.fillStyle=grad;
+                ctx.fill();
+                flag=0;
+                ctx.closePath();
+            }
+
+            if(!document.getElementById('box').checked && flag==2){
+                ctx.beginPath();
+                ctx.strokeStyle=boja1;
+                if(x[0]<x[1] && y[0]<y[1])
+                ctx.rect(x[0]-7,y[0]-7,Math.abs(x[0]-x[1]),Math.abs(y[0]-y[1]));
+                if(x[0]>x[1] && y[0]<y[1])
+                    ctx.rect(x[1]-7,y[0]-7,Math.abs(x[0]-x[1]),Math.abs(y[0]-y[1]));
+
+                if(y[0]>y[1] && x[0]<x[1])
+                    ctx.rect(x[0]-7,y[1]-7,Math.abs(x[0]-x[1]),Math.abs(y[0]-y[1]));
+                if(x[0]>x[1] && y[0]>y[1])
+                    ctx.rect(x[1]-7,y[1]-7,Math.abs(x[0]-x[1]),Math.abs(y[0]-y[1]));
+                ctx.stroke();
+
+                flag=0;
+        }
+
+        };
+            canvas.onmouseup = function(e){
+                gg(e.pageX, e.pageY);
+
+
+
+            };
+        }
+    </script>
+</head>
+<body onload="funkcija1()">
+<canvas id="MyCanvas" style="border:2px solid" width="400px" height="300px" > </canvas>
+<div>
+    <input id='box' type="checkbox"/>fill
+    <input id="boja1" type="color"/> color 1
+    <input id="boja2" type="color"/> color 2
+
+</div>
+</body>
+</html>

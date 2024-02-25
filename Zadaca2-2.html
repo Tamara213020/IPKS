@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Zadaca2 </title>
+    <script>
+        var flag1= false;
+        var flag2=false;
+        var flag3=false;
+           function funkcija1(){
+               var c=document.getElementById('MyCanvas');
+            var ctx= c.getContext("2d");
+            ctx.beginPath();
+            ctx.fillStyle="red";
+            ctx.rect(0,2*c.height/3,c.width/3,c.height/3);
+
+            ctx.fill();
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.fillStyle='green';
+            ctx.rect(c.width/3,2* c.height/3, c.width/3, c.height/3);
+            ctx.fill();
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.fillStyle='blue';
+            ctx.rect(2*c.width/3,2* c.height/3, c.width/3, c.height/3);
+            ctx.fill();
+            ctx.strokeStyle='black';
+            ctx.rect(0,0, c.width, c.height/3);
+            ctx.stroke();
+            c.onmouseup=function(e){
+                funkcija2(e.pageX-7, e.pageY-7);
+            };
+            ctx.closePath();
+        }
+        function funkcija2(x,y){
+            var c=document.getElementById('MyCanvas');
+            var ctx= c.getContext('2d');
+            var grad=ctx.createLinearGradient(0,0, c.width,0);
+            var grad2=ctx.createLinearGradient(c.width, c.height,0, c.height);
+
+
+
+            if(x< c.width/3 && y> 2*c.height/3)
+            {
+                flag1=!flag1;
+                if(flag1)
+                    grad.addColorStop(0,"red");
+                else grad.addColorStop(0,'white');
+                if(flag2)
+                    grad.addColorStop(0.5,"green");
+                else grad.addColorStop(0.5,'white');
+                if(flag3)
+                    grad.addColorStop(1,'blue');
+                else grad.addColorStop(1,'white');
+
+            }
+            if(x> c.width/3 && x<2* c.width/3 && y>2* c.height/3){
+                flag2= !flag2;
+                if(flag1)
+                    grad.addColorStop(0,"red");
+                else grad.addColorStop(0,'white');
+                if(flag2)
+                    grad.addColorStop(0.5,"green");
+                else grad.addColorStop(0.5,'white');
+                if(flag3)
+                    grad.addColorStop(1,'blue');
+                else grad.addColorStop(1,'white');
+
+            }
+            if(x> 2* c.width/3 && x< c.width && y>2* c.height/3){
+                flag3 = !flag3;
+                if(flag1)
+                    grad.addColorStop(0,"red");
+                else grad.addColorStop(0,'white');
+                if(flag2)
+                    grad.addColorStop(0.5,"green");
+                else grad.addColorStop(0.5,'white');
+                if(flag3)
+                    grad.addColorStop(1,'blue');
+                else grad.addColorStop(1,'white');
+
+            }
+
+            ctx.beginPath();
+            ctx.rect(0,0, c.width, c.height/3);
+            ctx.fillStyle=grad;
+
+            ctx.fill();
+ctx.closePath();
+        }
+    </script>
+</head>
+<body onload="funkcija1()" >
+    <canvas id="MyCanvas" style="border: 2px double" width="500px" height="400px">
+
+    </canvas>
+</body>
+</html>
